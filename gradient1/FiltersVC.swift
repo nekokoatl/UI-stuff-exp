@@ -7,48 +7,94 @@ import Foundation
 
 class FiltersVC: UIViewController  {
 
+    @IBOutlet var filterName: UILabel!
     
+//    var filterName.text: String = "mushroom"
+//    init () { filterName.text = "kek"}
+//    
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     @IBOutlet var image: UIImageView!
     
-      public let allFilters: Array = ["CISepiaTone", "CIPixelate", "CIPhotoEffectTransfer", "CIPhotoEffectNoir"]
-//  let allFilters: Array = ["CISepiaTone", "CIPixelate", "CIPhotoEffectTransfer", "CIPhotoEffectNoir"]
+ let allFilters: Array = [
+    "CIPixelate",
+    "CIPhotoEffectTransfer",
+    "CIPhotoEffectNoir",
+    "CIColorClamp",
+    "CIColorControls",
+    "CIColorMatrix",
+    "CIColorPolynomial",
+    "CIExposureAdjust",
+    "CIGammaAdjust",
+    "CIHueAdjust",
+    "CILinearToSRGBToneCurve",
+    "CISRGBToneCurveToLinear",
+    "CITemperatureAndTint",
+    "CIToneCurve",
+    "CIVibrance",
+    "CIWhitePointAdjust",
+    "CIColorCrossPolynomial",
+    "CIColorCube",
+    "CIColorCubeWithColorSpace",
+    "CIColorInvert",
+    "CIColorMap",
+    "CIColorMonochrome",
+    "CIColorPosterize",
+    "CIFalseColor",
+    "CIMaskToAlpha",
+    "CIMaximumComponent",
+    "CIMinimumComponent",
+    "CIPhotoEffectChrome",
+    "CIPhotoEffectFade",
+    "CIPhotoEffectInstant",
+    "CIPhotoEffectMono",
+    "CIPhotoEffectNoir",
+    "CIPhotoEffectProcess",
+    "CIPhotoEffectTonal",
+    "CIPhotoEffectTransfer",
+    "CISepiaTone",
+    "CIVignette",
+    "CIVignetteEffect"]
     
- //   var somewhat: Int = allFilters.count
     var somewhat: Int = 0
-   var randomIndex: Int = 0
-    //    var image: UIImage!
+    var randomIndex: Int = 0
     var tempArray: [String]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        filterName.text = "mushroom"
+        filterName.textColor = UIColor(red:0.27, green:0.54, blue:0.40, alpha:1.00)
+
         tempArray = allFilters
         _ = image.image
- //       image.image = startImage
     }
     
     @IBAction func filterIt(_ sender: AnyObject) {
-        var somewhat = allFilters.count
-         var randomIndex = Int(arc4random_uniform(UInt32(somewhat)))
-
         
-    //    if tempArray.count == 0 {
-       //     let startImage = image.image
-   //         image.image = startImage
-  //          tempArray = allFilters
-
-
- //       } else {
         
+        let somewhat = allFilters.count
+        let randomIndex = Int(arc4random_uniform(UInt32(somewhat)))
+
         let fileURL = Bundle.main.url(forResource: "gib", withExtension: "jpg")
-        var startImage = CIImage(contentsOf: fileURL!)
-        //  remove FIRST O_o
+        let startImage = CIImage(contentsOf: fileURL!)
         let filter = CIFilter(name: allFilters[randomIndex])
-  //      Int(arc4random_uniform(UInt32(randomFltr)))
         filter?.setValue(startImage, forKey: kCIInputImageKey)
         
         let newImage = UIImage(ciImage: (filter!.outputImage)!)
         self.image.image = newImage
+        
+        filterName.text = String(describing: filter!.name)
+        colorChangeLabel()
+       
         }
+    func colorChangeLabel() {
+        let randRed = CGFloat(drand48())
+        let randGreen = CGFloat(drand48())
+        let randBlue = CGFloat(drand48())
+        
+        filterName.textColor = UIColor(red: randRed, green: randGreen, blue: randBlue, alpha:1.00)
+    }
     }
 
 
