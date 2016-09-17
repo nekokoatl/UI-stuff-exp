@@ -5,38 +5,50 @@
 import UIKit
 import Foundation
 
-class FiltersVC {
+class FiltersVC: UIViewController  {
 
-    let allFilters = ["CISepiaTone", "CIPixelate", "CIPhotoEffectTransfer", "CIPhotoEffectNoir"]
-    var image: UIImage!
+    
+    @IBOutlet var image: UIImageView!
+    
+      public let allFilters: Array = ["CISepiaTone", "CIPixelate", "CIPhotoEffectTransfer", "CIPhotoEffectNoir"]
+//  let allFilters: Array = ["CISepiaTone", "CIPixelate", "CIPhotoEffectTransfer", "CIPhotoEffectNoir"]
+    
+ //   var somewhat: Int = allFilters.count
+    var somewhat: Int = 0
+   var randomIndex: Int = 0
+    //    var image: UIImage!
     var tempArray: [String]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tempArray = allFilters
-        let startImage = UIImage(named: "gib")
-        ImageView.image = startImage
+        _ = image.image
+ //       image.image = startImage
     }
     
     @IBAction func filterIt(_ sender: AnyObject) {
+        var somewhat = allFilters.count
+         var randomIndex = Int(arc4random_uniform(UInt32(somewhat)))
+
         
-        if tempArray.count = 0 {
-            let startImage = UIImage(named: "gib")
-            ImageView.image = startImage
-            tempArray = allFilters
+    //    if tempArray.count == 0 {
+       //     let startImage = image.image
+   //         image.image = startImage
+  //          tempArray = allFilters
 
 
-        } else {
+ //       } else {
         
-        let fileURL = NSBundle.mainBundle().URLForResource("gib", withExtension: "jpg")
-        let startImage = CIImage(contentsOf: fileURL)
+        let fileURL = Bundle.main.url(forResource: "gib", withExtension: "jpg")
+        var startImage = CIImage(contentsOf: fileURL!)
         //  remove FIRST O_o
-        let filter = CIFilter(name: tempArray.removeFirst())
+        let filter = CIFilter(name: allFilters[randomIndex])
+  //      Int(arc4random_uniform(UInt32(randomFltr)))
         filter?.setValue(startImage, forKey: kCIInputImageKey)
         
-        let newImage = UIImage(CIImage: filter?.outputImage)
-        self.ImageView.image = newImage
+        let newImage = UIImage(ciImage: (filter!.outputImage)!)
+        self.image.image = newImage
         }
     }
 
-}
+

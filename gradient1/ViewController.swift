@@ -19,7 +19,8 @@ class ViewController: UIViewController {
     @IBOutlet var text: UITextView!
     @IBOutlet var label: UILabel!
     
-    
+    public let allFilters: Array = ["CISepiaTone", "CIPixelate", "CIPhotoEffectTransfer", "CIPhotoEffectNoir"]
+
     
     let viridian = UIColor(red:0.27, green:0.54, blue:0.40, alpha:1.00).cgColor
     let supernova = UIColor(red:1.00, green:0.69, blue:0.23, alpha:1.00).cgColor
@@ -27,10 +28,14 @@ class ViewController: UIViewController {
     let roseOfSharon = UIColor(red:0.71, green:0.29, blue:0.15, alpha:1.00).cgColor
     let totemPole = UIColor(red:0.56, green:0.16, blue:0.00, alpha:1.00).cgColor
     
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+
+          
+        
         let gradient = CAGradientLayer()
         gradient.frame = self.view.bounds
         gradient.colors = [viridian, supernova, visVis, roseOfSharon, totemPole]
@@ -51,14 +56,12 @@ class ViewController: UIViewController {
                                  userInfo: nil,
                                  repeats: true)
         }
-        
-    
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+ 
     
     func colorChangeText() {
         let randRed = CGFloat(drand48())

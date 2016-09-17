@@ -82,7 +82,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wLM-m5-3Ke">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gib.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="wLM-m5-3Ke">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="450" id="VWc-dY-gzv"/>
                                 </constraints>
@@ -93,7 +93,7 @@
                                     <color key="titleColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="filterIt:" destination="zxV-GM-2bN" eventType="touchUpInside" id="h52-X5-c7L"/>
+                                    <action selector="filterIt:" destination="zxV-GM-2bN" eventType="touchUpInside" id="OOp-UP-Gvf"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -109,7 +109,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="image" destination="wLM-m5-3Ke" id="9d1-iQ-thS"/>
+                        <outlet property="image" destination="wLM-m5-3Ke" id="kBn-Em-Ru5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xoS-w4-OBs" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -121,7 +121,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9LE-kb-dBu" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" alpha="0.69999999999999996" contentMode="scaleToFill" misplaced="YES" id="cy6-Ge-bpb">
+                    <navigationBar key="navigationBar" alpha="0.69999999999999996" contentMode="scaleToFill" id="cy6-Ge-bpb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.80000000000000004"/>
@@ -139,5 +139,6 @@
     </scenes>
     <resources>
         <image name="bulba" width="515" height="480"/>
+        <image name="gib.jpg" width="450" height="450"/>
     </resources>
 </document>
