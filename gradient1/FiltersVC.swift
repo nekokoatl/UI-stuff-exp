@@ -9,12 +9,6 @@ class FiltersVC: UIViewController  {
 
     @IBOutlet var filterName: UILabel!
     
-//    var filterName.text: String = "mushroom"
-//    init () { filterName.text = "kek"}
-//    
-//    required init?(coder aDecoder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
     @IBOutlet var image: UIImageView!
     
  let allFilters: Array = [
@@ -30,9 +24,9 @@ class FiltersVC: UIViewController  {
     "CIHueAdjust",
     "CILinearToSRGBToneCurve",
     "CISRGBToneCurveToLinear",
-    "CITemperatureAndTint",
+    "CITemperatureAndTint",//
     "CIToneCurve",
-    "CIVibrance",
+    "CIVibrance",//
     "CIWhitePointAdjust",
     "CIColorCrossPolynomial",
     "CIColorCube",
@@ -49,13 +43,14 @@ class FiltersVC: UIViewController  {
     "CIPhotoEffectFade",
     "CIPhotoEffectInstant",
     "CIPhotoEffectMono",
-    "CIPhotoEffectNoir",
+   "CIPhotoEffectNoir",
     "CIPhotoEffectProcess",
     "CIPhotoEffectTonal",
     "CIPhotoEffectTransfer",
     "CISepiaTone",
     "CIVignette",
-    "CIVignetteEffect"]
+    "CIVignetteEffect"
+    ]
     
     var somewhat: Int = 0
     var randomIndex: Int = 0
@@ -71,23 +66,28 @@ class FiltersVC: UIViewController  {
     }
     
     @IBAction func filterIt(_ sender: AnyObject) {
-        
-        
         let somewhat = allFilters.count
         let randomIndex = Int(arc4random_uniform(UInt32(somewhat)))
-
+        
         let fileURL = Bundle.main.url(forResource: "gib", withExtension: "jpg")
         let startImage = CIImage(contentsOf: fileURL!)
+        
         let filter = CIFilter(name: allFilters[randomIndex])
-        filter?.setValue(startImage, forKey: kCIInputImageKey)
-        
-        let newImage = UIImage(ciImage: (filter!.outputImage)!)
-        self.image.image = newImage
-        
-        filterName.text = String(describing: filter!.name)
-        colorChangeLabel()
-       
-        }
+            filter?.setValue(startImage, forKey: kCIInputImageKey)
+            let firstImg = (ciImage: (filter?.outputImage))
+                let newImage = convert(cmage: firstImg!)
+                self.image.image = newImage
+                filterName.text = String(describing: filter?.name)
+                self.colorChangeLabel()
+    }
+    
+    func convert(cmage:CIImage) -> UIImage {
+        let context:CIContext = CIContext.init(options: nil)
+        let cgImage:CGImage = context.createCGImage(cmage, from: cmage.extent)!
+        let image:UIImage = UIImage.init(cgImage: cgImage)
+        return image
+    }
+    
     func colorChangeLabel() {
         let randRed = CGFloat(drand48())
         let randGreen = CGFloat(drand48())
@@ -95,6 +95,6 @@ class FiltersVC: UIViewController  {
         
         filterName.textColor = UIColor(red: randRed, green: randGreen, blue: randBlue, alpha:1.00)
     }
-    }
+}
 
 
